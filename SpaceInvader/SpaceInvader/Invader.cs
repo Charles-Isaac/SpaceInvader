@@ -14,19 +14,7 @@ namespace SpaceInvader
         private Vector2 m_Position;
         private bool m_GoingRight; // True if going right, false if going left
         private bool m_BottomMost; // True if it's the bottom-most entity in its column
-
-        public bool GoingRight
-        {
-            get
-            {
-                return m_GoingRight;
-            }
-
-            set
-            {
-                m_GoingRight = value;
-            }
-        }
+        private Vector2 m_Velocity;
 
         public Vector2 Position
         {
@@ -41,9 +29,22 @@ namespace SpaceInvader
             }
         }
 
+        public Vector2 Velocity
+        {
+            get
+            {
+                return m_Velocity;
+            }
+
+            set
+            {
+                m_Velocity = value;
+            }
+        }
+
         public void Update()
         {
-            throw new NotImplementedException();
+
         }
 
         public void Shoot()
@@ -54,6 +55,12 @@ namespace SpaceInvader
         public void Die()
         {
 
+        }
+
+        public void ChangeDirection(bool Right)
+        {
+            m_GoingRight = Right;
+            m_Velocity = (Right ? new Vector2(20, 0) : new Vector2(-20, 0));
         }
 
     }
