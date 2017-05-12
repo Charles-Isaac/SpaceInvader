@@ -45,7 +45,7 @@ namespace SpaceInvader
             {
                 for (int x = 0; x < 12; x++)
                 {
-                    m_Invaders[x, y] = new Invader();
+                    m_Invaders[x, y] = new Invader(x, y);
                 }
             }
         }
