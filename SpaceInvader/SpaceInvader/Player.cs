@@ -12,44 +12,12 @@ namespace SpaceInvader
     class Player : IPlayer
     {
         private int Lives;
-        private Vector2 Pos;
-        private Vector2 PlayerSize;
+        private Rectangle Tank;
 
         public Player()
         {
-            Pos.X = 500;
-            Pos.Y = 10;
-
+            Tank = new Rectangle(475, 10, 50, 25);
             Lives = 3;
-
-            PlayerSize.X = 50;
-            PlayerSize.Y = 25;  
-        }
-
-        public Vector2 Position
-        {
-            get
-            {
-                return Pos;
-            }
-
-            set
-            {
-                Pos = value;
-            }
-        }
-
-        public Vector2 Size
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         public Vector2 Velocity
@@ -65,7 +33,7 @@ namespace SpaceInvader
             }
         }
 
-        public Vector2 Size
+        public bool Dead
         {
             get
             {
@@ -78,34 +46,41 @@ namespace SpaceInvader
             }
         }
 
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return Tank;
+            }
+
+            set
+            {
+                Tank = value;
+            }
+        }
+
         public void CheckCollisions(IMissile m)
         {
-            //Création des "hitbox"
-            Rectangle missile = new Rectangle((int)m.Position.X,
-                (int)m.Position.Y, (int)m.Size.X, (int)m.Size.Y);
-            Rectangle Tank = new Rectangle((int)this.Position.X, (int)this.Position.Y,
-                (int)this.Size.X, (int)this.Size.Y);
-
             //Gestion collision avec missile
-            if (missile.Intersects(Tank))
+            if (m.Hitbox.Intersects(Tank))
             {
                 Lives--;
             }
             
             //Mur gauche
-            if(Pos.X < 2)
+            if(Tank.X < 2)
             {
-                Pos.X = 2;
+                Tank.X = 2;
             }
 
             //Mur droit
-            if(Pos.X + Size.X > 998)
+            if(Tank.Right > 998)
             {
-                Pos.X = 998 - Size.X - 1;
+                Tank.X = 998 - Tank.Width - 1;
             }
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             throw new NotImplementedException();
         }
