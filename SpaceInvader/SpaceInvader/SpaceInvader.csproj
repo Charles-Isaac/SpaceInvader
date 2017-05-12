@@ -38,6 +38,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EntityManager.cs" />
+    <Compile Include="IMoveable.cs" />
+    <Compile Include="Invader.cs" />
     <Compile Include="SpaceInvader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

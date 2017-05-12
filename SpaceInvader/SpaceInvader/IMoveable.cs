@@ -6,7 +6,6 @@ namespace SpaceInvader
 {
     public interface IMoveable
     {
-        Vector2 Velocity { get; set; }
         Vector2 Position { get; set; }
         void Update();
     }
