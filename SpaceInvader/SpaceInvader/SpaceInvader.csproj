@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="EntityManager.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IInvader.cs" />
     <Compile Include="IMissile.cs" />
     <Compile Include="IMoveable.cs" />
     <Compile Include="Invader.cs" />

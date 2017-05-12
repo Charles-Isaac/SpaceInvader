@@ -11,40 +11,26 @@ namespace SpaceInvader
 {
     public class Invader : IEntity
     {
-        private Vector2 m_Position;
         private bool m_GoingRight; // True if going right, false if going left
         private bool m_BottomMost; // True if it's the bottom-most entity in its column
         private Vector2 m_Velocity;
         private double m_NextShootTime;
+        private Rectangle m_Hitbox;
 
         private int m_ArrayPosX;
         private int m_ArrayPosY;
         private bool m_Dead;
+        private EntityManager m_Manager;
 
-        private Vector2 m_Size;
 
-
-        public Invader(int x, int y)
+        public Invader(int x, int y, EntityManager em)
         {
             m_ArrayPosX = x;
             m_ArrayPosY = y;
             m_BottomMost = y == 4;
             this.ChangeDirection(true);
-            m_Size = new Vector2(50, 25);
-            m_Position = new Vector2(x * 15 + x * 50 + 15, y * 40 + y * 25 + 40);
-        }
-
-        public Vector2 Position
-        {
-            get
-            {
-                return m_Position;
-            }
-
-            set
-            {
-                m_Position = value;
-            }
+            m_Manager = em;
+            m_Hitbox = new Rectangle(x * 15 + x * 50 + 15, y * 40 + y * 25 + 40, 50, 25);
         }
 
         public Vector2 Velocity
@@ -57,19 +43,6 @@ namespace SpaceInvader
             set
             {
                 m_Velocity = value;
-            }
-        }
-
-        public Vector2 Size
-        {
-            get
-            {
-                return m_Size;
-            }
-
-            set
-            {
-                m_Size = value;
             }
         }
 
@@ -86,12 +59,30 @@ namespace SpaceInvader
             }
         }
 
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return m_Hitbox;
+            }
+
+            set
+            {
+                m_Hitbox = value;
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
-            m_Position += m_Velocity;
+            m_Hitbox.Location += m_Velocity.ToPoint();
             if (m_BottomMost && gameTime.TotalGameTime.TotalMilliseconds > m_NextShootTime)
             {
                 Shoot(gameTime);
+            }
+
+            if (m_Hitbox.Right > 998 || m_Hitbox.Left < 2)
+            {
+                
             }
 
         }
@@ -104,6 +95,8 @@ namespace SpaceInvader
 
         public void Die()
         {
+            m_Dead = true;
+
             // TODO, TELL INVADER ABOVE THAT HE'S BOTTOM MOST
         }
 
@@ -117,8 +110,10 @@ namespace SpaceInvader
         {
             if (m.GoingUp)
             {
-                Rectangle r = new Rectangle(m_Position.ToPoint(), m_Size.ToPoint());
-
+                if (this.Hitbox.Intersects(m.Hitbox))
+                {
+                    this.Die();
+                }
             }
         }
     }
