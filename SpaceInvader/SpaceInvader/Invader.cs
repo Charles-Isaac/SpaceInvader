@@ -15,15 +15,23 @@ namespace SpaceInvader
         private bool m_GoingRight; // True if going right, false if going left
         private bool m_BottomMost; // True if it's the bottom-most entity in its column
         private Vector2 m_Velocity;
+        private double m_NextShootTime;
 
         private int m_ArrayPosX;
         private int m_ArrayPosY;
+        private bool m_Dead;
+
+        private Vector2 m_Size;
 
 
         public Invader(int x, int y)
         {
             m_ArrayPosX = x;
             m_ArrayPosY = y;
+            m_BottomMost = y == 4;
+            this.ChangeDirection(true);
+            m_Size = new Vector2(50, 25);
+            m_Position = new Vector2(x * 15 + x * 50 + 15, y * 40 + y * 25 + 40);
         }
 
         public Vector2 Position
@@ -52,14 +60,44 @@ namespace SpaceInvader
             }
         }
 
-        public void Update()
+        public Vector2 Size
         {
+            get
+            {
+                return m_Size;
+            }
 
+            set
+            {
+                m_Size = value;
+            }
         }
 
-        public void Shoot()
+        public bool Dead
         {
+            get
+            {
+                return m_Dead;
+            }
 
+            set
+            {
+                m_Dead = value;
+            }
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            m_Position += m_Velocity;
+            if (gameTime.TotalGameTime.TotalMilliseconds > m_NextShootTime)
+            {
+                Shoot(gameTime);
+            }
+        }
+
+        public void Shoot(GameTime gametime)
+        {
+            m_NextShootTime = gametime.TotalGameTime.TotalMilliseconds + 500;
         }
 
         public void Die()

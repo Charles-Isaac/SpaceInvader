@@ -9,5 +9,7 @@ namespace SpaceInvader
     public interface IEntity : IMoveable
     {
         void CheckCollisions(IMissile m);
+
+        bool Dead { get; set; }
     }
 }

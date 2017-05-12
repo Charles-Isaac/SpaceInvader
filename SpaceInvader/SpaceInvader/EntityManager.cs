@@ -50,16 +50,16 @@ namespace SpaceInvader
             }
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             foreach (IMissile m in m_Missiles)
             {
-                m.Update();
+                m.Update(gameTime);
             }
 
             foreach (Invader i in m_Invaders)
             {
-                i.Update();
+                i.Update(gameTime);
                 foreach (IMissile m in m_Missiles)
                 {
                     i.CheckCollisions(m);
