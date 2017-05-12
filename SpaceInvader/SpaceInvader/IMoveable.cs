@@ -9,5 +9,6 @@ namespace SpaceInvader
         Vector2 Position { get; set; }
         Vector2 Velocity { get; set; }
         void Update();
+        Vector2 Size { get; set; }
     }
 }

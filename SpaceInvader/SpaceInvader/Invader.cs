@@ -16,6 +16,16 @@ namespace SpaceInvader
         private bool m_BottomMost; // True if it's the bottom-most entity in its column
         private Vector2 m_Velocity;
 
+        private int m_ArrayPosX;
+        private int m_ArrayPosY;
+
+
+        public Invader(int x, int y)
+        {
+            m_ArrayPosX = x;
+            m_ArrayPosY = y;
+        }
+
         public Vector2 Position
         {
             get
