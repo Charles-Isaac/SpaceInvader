@@ -39,6 +39,19 @@ namespace SpaceInvader
             }
         }
 
+        public Vector2 Size
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public Vector2 Velocity
         {
             get

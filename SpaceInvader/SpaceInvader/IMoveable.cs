@@ -6,9 +6,8 @@ namespace SpaceInvader
 {
     public interface IMoveable
     {
-        Vector2 Position { get; set; }
+        Rectangle Hitbox { get; set; }
         Vector2 Velocity { get; set; }
-        void Update();
-        Vector2 Size { get; set; }
+        void Update(GameTime gameTime);
     }
 }

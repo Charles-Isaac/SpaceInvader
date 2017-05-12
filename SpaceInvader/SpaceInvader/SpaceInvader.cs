@@ -9,8 +9,8 @@ namespace SpaceInvader
     /// </summary>
     public class SpaceInvader : Game
     {
-        public const int MAX_X = 1000;
-        public const int MAX_Y = 1000;
+        public static int MAX_X = 1000;
+        public static int MAX_Y = 1000;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
