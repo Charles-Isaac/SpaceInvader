@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpaceInvader
 {
-    public interface IEntity : IMoveable
+    public interface IInvader : IEntity
     {
-        void CheckCollisions(IMissile m);
+        bool Dead { get; set; }
     }
 }
