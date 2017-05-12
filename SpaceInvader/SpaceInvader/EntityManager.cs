@@ -12,12 +12,12 @@ namespace SpaceInvader
 {
     public class EntityManager
     {
-        private Invader[,] m_Invaders; // x, 0 is top; x, 4 is bottom
+        private IInvader[,] m_Invaders; // x, 0 is top; x, 4 is bottom
         private List<IMissile> m_Missiles;
         private byte m_ShouldChange; // 000000[direction][should change] (0x03 = should change all to right), (0x01 = should change all to left)
         private IPlayer m_player;
 
-        public Invader[,] Invaders
+        public IInvader[,] Invaders
         {
             get { return m_Invaders; }
         }
@@ -40,12 +40,12 @@ namespace SpaceInvader
         public void Init(IPlayer p)
         {
             m_player = p;
-            m_Invaders = new Invader[12, 5];
+            m_Invaders = new IInvader[12, 5];
             for (int y = 0; y < 4; y++)
             {
                 for (int x = 0; x < 12; x++)
                 {
-                    m_Invaders[x, y] = new Invader(x, y);
+                    m_Invaders[x, y] = new Invader(x, y, this);
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace SpaceInvader
                 m.Update(gameTime);
             }
 
-            foreach (Invader i in m_Invaders)
+            foreach (IInvader i in m_Invaders)
             {
                 i.Update(gameTime);
                 foreach (IMissile m in m_Missiles)

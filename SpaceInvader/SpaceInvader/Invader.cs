@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SpaceInvader
 {
-    public class Invader : IEntity
+    public class Invader : IInvader
     {
         private bool m_GoingRight; // True if going right, false if going left
         private bool m_BottomMost; // True if it's the bottom-most entity in its column
