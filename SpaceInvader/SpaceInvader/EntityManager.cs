@@ -13,31 +13,31 @@ namespace SpaceInvader
     public class EntityManager
     {
         private Invader[,] m_Invaders; // x, 0 is top; x, 4 is bottom
-        private List<Missile> m_Missiles;
+        private List<IMissile> m_Missiles;
         private byte m_ShouldChange; // 000000[direction][should change] (0x03 = should change all to right), (0x01 = should change all to left)
-        private Player m_player;
+        private IPlayer m_player;
 
         public Invader[,] Invaders
         {
             get { return m_Invaders; }
         }
 
-        public List<Missile> Missiles
+        public List<IMissile> Missiles
         {
             get { return m_Missiles; }
             set { m_Missiles = value; }
         }
 
-        public void AddMissile(Missile m)
+        public void AddMissile(IMissile m)
         {
             m_Missiles.Add(m);
         }
-        public void RemoveMissile(Missile m)
+        public void RemoveMissile(IMissile m)
         {
             m_Missiles.Remove(m);
         }
 
-        public void Init(Player p)
+        public void Init(IPlayer p)
         {
             m_player = p;
             m_Invaders = new Invader[12, 5];
@@ -52,7 +52,7 @@ namespace SpaceInvader
 
         public void Update()
         {
-            foreach (Missile m in m_Missiles)
+            foreach (IMissile m in m_Missiles)
             {
                 m.Update();
             }
@@ -60,7 +60,7 @@ namespace SpaceInvader
             foreach (Invader i in m_Invaders)
             {
                 i.Update();
-                foreach (Missile m in m_Missiles)
+                foreach (IMissile m in m_Missiles)
                 {
                     i.CheckCollisions(m);
                 }
@@ -71,7 +71,7 @@ namespace SpaceInvader
                 bool GoingRight = (m_ShouldChange & 0x2) == 0x2;
                 foreach (Invader i in m_Invaders)
                 {
-                    i.GoingRight = GoingRight;
+                    i.ChangeDirection(GoingRight);
                 }
             }
         }

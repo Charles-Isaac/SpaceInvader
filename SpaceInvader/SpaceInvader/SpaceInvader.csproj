@@ -39,8 +39,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EntityManager.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IMissile.cs" />
     <Compile Include="IMoveable.cs" />
     <Compile Include="Invader.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="SpaceInvader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

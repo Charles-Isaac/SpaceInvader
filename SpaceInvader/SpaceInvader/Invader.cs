@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SpaceInvader
 {
-    public class Invader : IMoveable
+    public class Invader : IEntity
     {
         private Vector2 m_Position;
         private bool m_GoingRight; // True if going right, false if going left
@@ -63,5 +63,9 @@ namespace SpaceInvader
             m_Velocity = (Right ? new Vector2(20, 0) : new Vector2(-20, 0));
         }
 
+        public void CheckCollisions(IMissile m)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
