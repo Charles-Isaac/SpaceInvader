@@ -13,10 +13,12 @@ namespace SpaceInvader
     {
         private int Lives;
         private Rectangle Tank;
+        private Vector2 Depl;
 
         public Player()
         {
             Tank = new Rectangle(475, 10, 50, 25);
+            Depl = new Vector2(1, 0);
             Lives = 3;
         }
 
@@ -24,25 +26,12 @@ namespace SpaceInvader
         {
             get
             {
-                throw new NotImplementedException();
+                return Depl;
             }
 
             set
             {
-                throw new NotImplementedException();
-            }
-        }
-
-        public bool Dead
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
+                Depl = value;
             }
         }
 
@@ -82,7 +71,14 @@ namespace SpaceInvader
 
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            if(Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                Tank.Location -= Depl.ToPoint();
+            }
+            if(Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                Tank.Location += Depl.ToPoint();
+            }
         }
     }
 }
