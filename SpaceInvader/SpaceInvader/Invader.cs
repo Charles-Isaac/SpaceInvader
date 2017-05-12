@@ -89,20 +89,22 @@ namespace SpaceInvader
         public void Update(GameTime gameTime)
         {
             m_Position += m_Velocity;
-            if (gameTime.TotalGameTime.TotalMilliseconds > m_NextShootTime)
+            if (m_BottomMost && gameTime.TotalGameTime.TotalMilliseconds > m_NextShootTime)
             {
                 Shoot(gameTime);
             }
+
         }
 
         public void Shoot(GameTime gametime)
         {
             m_NextShootTime = gametime.TotalGameTime.TotalMilliseconds + 500;
+            // TODO - ADD MISSILE CREATION HERE
         }
 
         public void Die()
         {
-
+            // TODO, TELL INVADER ABOVE THAT HE'S BOTTOM MOST
         }
 
         public void ChangeDirection(bool Right)
@@ -113,7 +115,11 @@ namespace SpaceInvader
 
         public void CheckCollisions(IMissile m)
         {
-            throw new NotImplementedException();
+            if (m.GoingUp)
+            {
+                Rectangle r = new Rectangle(m_Position.ToPoint(), m_Size.ToPoint());
+
+            }
         }
     }
 }
