@@ -33,11 +33,6 @@ namespace SpaceInvader
             }
         }
 
-        public bool Remove(Invader i)
-        {
-            return m_Invaders.Remove(i);
-        }
-
         public void Update()
         {
             foreach (Invader i in m_Invaders)
